@@ -2,7 +2,7 @@
 
 !.gitignore
 
-!.config/nix-darwin
+!.config/nix*
 
 !.gitconfig
 !.ideavimrc
