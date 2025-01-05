@@ -1,14 +1,18 @@
 { config, pkgs, ... }:
+let
+  userName = "eduardo.paz";
+  homePath = "/Users/${userName}";
+in
 {
   # DO NOT CHANGE
 
   imports = [
-    ../nix-shared
+    ../nix-shared/system.nix
     ./aerospace.nix
     <home-manager/nix-darwin>
   ];
 
-  environment.darwinConfig = "$HOME/.config/nix-darwin/configuration.nix";
+  environment.darwinConfig = "${homePath}/.config/nix-darwin/configuration.nix";
   system.stateVersion = 5;
 
   # Settings
@@ -22,10 +26,7 @@
 
   ## System settings
 
-  users.users."eduardo.paz" = {
-    name = "eduardo.paz";
-    home = "/Users/eduardo.paz";
-  };
+  users.users.${userName}.home = homePath;
 
   networking.computerName = "MacBook do Edu";
   security.pam.enableSudoTouchIdAuth = true;
@@ -37,13 +38,13 @@
   system.defaults.finder._FXShowPosixPathInTitle = true;
   system.defaults.finder._FXSortFoldersFirst = true;
   system.defaults.hitoolbox.AppleFnUsageType = "Do Nothing";
-  system.defaults.loginwindow.autoLoginUser = "eduardo.paz";
+  system.defaults.loginwindow.autoLoginUser = userName;
   time.timeZone = "America/Sao_Paulo";
 
   # Env vars
 
   environment.variables = {
-    DOCKER_HOST = "unix:///Users/eduardo.paz/.colima/default/docker.sock";
+    DOCKER_HOST = "unix://${homePath}/.colima/default/docker.sock";
     EDITOR = "vim";
     TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE = "/var/run/docker.sock";
   };
@@ -88,29 +89,23 @@
 
   ## Home Manager packages
 
-  home-manager.users."eduardo.paz" =
+  home-manager.users.${userName} =
     { ... }:
     {
-      programs.bat.enable = true;
-      programs.btop.enable = true;
-      programs.eza.enable = true;
-      programs.jq.enable = true;
+      imports = [ ../nix-shared/home-manager.nix ];
+
       programs.mise.enable = true;
       programs.zsh.enable = true;
 
-      programs.starship.enable = true;
       programs.starship.settings = {
         character = {
-          success_symbol = "[󱢇](bold green)";
-          error_symbol = "[󱢇](bold red)";
+          success_symbol = "[󰀵](bold green)";
+          error_symbol = "[󰀵](bold red)";
         };
       };
 
       programs.atuin.enable = true;
       programs.atuin.flags = [ "--disable-up-arrow" ];
-
-      programs.yazi.enable = true;
-      programs.yazi.shellWrapperName = "y";
 
       programs.kitty.enable = true;
       programs.kitty.font.name = "FiraCode Nerd Font";
@@ -119,9 +114,6 @@
       programs.kitty.settings = {
         window_padding_width = 5;
       };
-
-      programs.zoxide.enable = true;
-      programs.zoxide.options = [ "--cmd cd" ];
 
       programs.zsh.prezto.enable = true;
       programs.zsh.prezto.editor.keymap = "vi";
@@ -146,5 +138,4 @@
       # originally installed.
       home.stateVersion = "24.11";
     };
-
 }
