@@ -72,20 +72,17 @@ in
 
   ## Homebrew packages
 
-  homebrew.casks = [
-    {
-      name = "firefox";
-      greedy = true;
-    }
-    {
-      name = "notion";
-      greedy = true;
-    }
-    {
-      name = "whatsapp";
-      greedy = true;
-    }
-  ];
+  homebrew.casks =
+    map
+      (name: {
+        inherit name;
+        greedy = true;
+      })
+      [
+        "firefox"
+        "notion"
+        "whatsapp"
+      ];
 
   ## Home Manager packages
 
