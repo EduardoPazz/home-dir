@@ -1,14 +1,20 @@
 {
-  programs.bat.enable = true;
-  programs.btop.enable = true;
-  programs.eza.enable = true;
-  programs.fish.enable = true;
-  programs.hyfetch.enable = true;
-  programs.starship.enable = true;
+  programs = {
+    bat.enable = true;
+    btop.enable = true;
+    eza.enable = true;
+    fish.enable = true;
+    hyfetch.enable = true;
+    starship.enable = true;
 
-  programs.yazi.enable = true;
-  programs.yazi.shellWrapperName = "y";
+    yazi = {
+      enable = true;
+      shellWrapperName = "y";
+    };
 
-  programs.zoxide.enable = true;
-  programs.zoxide.options = [ "--cmd cd" ];
+    zoxide = {
+      enable = true;
+      options = [ "--cmd cd" ];
+    };
+  };
 }
