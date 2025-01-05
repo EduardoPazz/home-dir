@@ -1,0 +1,9 @@
+**/*
+
+!.gitignore
+
+!.config/nix-darwin
+
+!.gitconfig
+!.ideavimrc
+!.vimrc
