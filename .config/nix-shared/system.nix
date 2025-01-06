@@ -15,8 +15,11 @@
     rm = "rm -vi";
 
     ga = "git add .";
+    gb = "git branch";
     gc = "git commit";
+    gco = "git checkout";
     gl = "git pull";
+    glor = "git pull origin";
     gp = "git push";
     gs = "git status";
     grhforno = "git reset --hard origin/forno";
