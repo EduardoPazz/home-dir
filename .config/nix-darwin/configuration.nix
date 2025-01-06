@@ -4,8 +4,6 @@ let
   homePath = "/Users/${userName}";
 in
 {
-  # DO NOT CHANGE
-
   imports = [
     ../nix-shared/system.nix
     ./aerospace.nix
@@ -13,16 +11,22 @@ in
   ];
 
   environment.darwinConfig = "${homePath}/.config/nix-darwin/configuration.nix";
+
+  # DO NOT CHANGE
   system.stateVersion = 5;
 
   # Settings
 
   ## Homebrew settings
 
-  homebrew.enable = true;
-  homebrew.onActivation.autoUpdate = true;
-  homebrew.onActivation.cleanup = "uninstall";
-  homebrew.onActivation.upgrade = true;
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "uninstall";
+      upgrade = true;
+    };
+  };
 
   ## System settings
 
@@ -30,16 +34,22 @@ in
 
   networking.computerName = "MacBook do Edu";
   security.pam.enableSudoTouchIdAuth = true;
-  system.defaults.controlcenter.BatteryShowPercentage = true;
-  system.defaults.dock.autohide = true;
-  system.defaults.finder.AppleShowAllExtensions = true;
-  system.defaults.finder.AppleShowAllFiles = false;
-  system.defaults.finder.ShowStatusBar = true;
-  system.defaults.finder._FXShowPosixPathInTitle = true;
-  system.defaults.finder._FXSortFoldersFirst = true;
-  system.defaults.hitoolbox.AppleFnUsageType = "Do Nothing";
-  system.defaults.loginwindow.autoLoginUser = userName;
   time.timeZone = "America/Sao_Paulo";
+
+  system.defaults = {
+    controlcenter.BatteryShowPercentage = true;
+    dock.autohide = true;
+    hitoolbox.AppleFnUsageType = "Do Nothing";
+    loginwindow.autoLoginUser = userName;
+
+    finder = {
+      AppleShowAllExtensions = true;
+      AppleShowAllFiles = false;
+      ShowStatusBar = true;
+      _FXShowPosixPathInTitle = true;
+      _FXSortFoldersFirst = true;
+    };
+  };
 
   # Env vars
 
@@ -91,44 +101,52 @@ in
     {
       imports = [ ../nix-shared/home-manager.nix ];
 
-      programs.mise.enable = true;
-      programs.zsh.enable = true;
+      programs = {
+        mise.enable = true;
 
-      programs.starship.settings = {
-        character = {
+        starship.settings.character = {
           success_symbol = "[󰀵](bold green)";
           error_symbol = "[󰀵](bold red)";
         };
+
+        atuin = {
+          enable = true;
+          flags = [ "--disable-up-arrow" ];
+        };
+
+        kitty = {
+          enable = true;
+          themeFile = "gruvbox-dark-hard";
+          settings.window_padding_width = 5;
+          font = {
+            name = "FiraCode Nerd Font";
+            size = 16;
+          };
+        };
+
+        zsh = {
+          enable = true;
+          prezto = {
+            enable = true;
+            editor.keymap = "vi";
+            utility.safeOps = false;
+            pmodules = [
+              "editor"
+
+              "syntax-highlighting"
+              "history-substring-search"
+              "autosuggestions"
+
+              "git"
+              "utility"
+              "completion"
+            ];
+            extraConfig = ''
+              zstyle ':prezto:module:git:alias' skip 'yes'
+            '';
+          };
+        };
       };
-
-      programs.atuin.enable = true;
-      programs.atuin.flags = [ "--disable-up-arrow" ];
-
-      programs.kitty.enable = true;
-      programs.kitty.font.name = "FiraCode Nerd Font";
-      programs.kitty.font.size = 16;
-      programs.kitty.themeFile = "gruvbox-dark-hard";
-      programs.kitty.settings = {
-        window_padding_width = 5;
-      };
-
-      programs.zsh.prezto.enable = true;
-      programs.zsh.prezto.editor.keymap = "vi";
-      programs.zsh.prezto.utility.safeOps = false;
-      programs.zsh.prezto.pmodules = [
-        "editor"
-
-        "syntax-highlighting"
-        "history-substring-search"
-        "autosuggestions"
-
-        "git"
-        "utility"
-        "completion"
-      ];
-      programs.zsh.prezto.extraConfig = ''
-        zstyle ':prezto:module:git:alias' skip 'yes'
-      '';
 
       # DO NOT CHANGE
       # The state version is required and should stay at the version you

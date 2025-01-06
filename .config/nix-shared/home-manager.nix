@@ -3,7 +3,6 @@
     bat.enable = true;
     btop.enable = true;
     eza.enable = true;
-    fish.enable = true;
     hyfetch.enable = true;
     starship.enable = true;
 

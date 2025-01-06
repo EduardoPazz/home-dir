@@ -7,7 +7,6 @@
   # Aliases
 
   environment.shellAliases = {
-    b = "bat";
     v = "vim";
 
     cp = "cp -vi";
