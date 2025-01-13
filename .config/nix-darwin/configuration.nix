@@ -70,6 +70,9 @@ in
   environment.systemPackages = with pkgs; [
     brave
     colima
+    docker
+    docker-compose
+    docker-credential-helpers
     ffmpeg
     imagemagick
     jetbrains.idea-ultimate
