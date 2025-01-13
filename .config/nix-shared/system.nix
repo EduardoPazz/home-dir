@@ -21,8 +21,11 @@
     ga = "git add .";
     gb = "git branch";
     gc = "git commit";
+    gcb = "git checkout -b";
     gco = "git checkout";
+    gfa = "git fetch --all";
     gl = "git pull";
+    glog = "git log --topo-order --graph --pretty=format:\"$_git_log_oneline_format\"";
     glor = "git pull origin";
     gp = "git push";
     gs = "git status";
