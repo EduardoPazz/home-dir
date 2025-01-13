@@ -3,6 +3,7 @@
     bat.enable = true;
     btop.enable = true;
     eza.enable = true;
+    git.enable = true;
     hyfetch.enable = true;
     starship.enable = true;
 
