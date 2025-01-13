@@ -81,6 +81,10 @@ in
     postman
     raycast
     tldr
+
+    # monorepo migration
+    gawk
+    git-filter-repo
   ];
 
   ## Homebrew packages
