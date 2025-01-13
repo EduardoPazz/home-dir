@@ -1,8 +1,12 @@
 {
   # Settings  
 
-  nixpkgs.config.allowUnfree = true;
   home-manager.useGlobalPkgs = true;
+
+  nix.gc.automatic = true;
+  nix.optimise.automatic = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   # Aliases
 
