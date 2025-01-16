@@ -111,11 +111,14 @@ in
       programs = {
         mise.enable = true;
 
-        atuin.enable = true;
-
         starship.settings.character = {
           success_symbol = "[󰀵](bold green)";
           error_symbol = "[󰀵](bold red)";
+        };
+
+        atuin = {
+          enable = true;
+          flags = [ "--disable-up-arrow" ];
         };
 
         kitty = {
