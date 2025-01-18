@@ -77,6 +77,7 @@ in
     imagemagick
     jetbrains.idea-ultimate
     nginx
+    ngrok
     nixfmt-rfc-style
     postman
     raycast
