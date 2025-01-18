@@ -145,13 +145,9 @@ in
               "history-substring-search"
               "autosuggestions"
 
-              "git"
               "utility"
               "completion"
             ];
-            extraConfig = ''
-              zstyle ':prezto:module:git:alias' skip 'yes'
-            '';
           };
         };
       };
