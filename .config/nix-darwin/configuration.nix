@@ -145,7 +145,6 @@ in
               "history-substring-search"
               "autosuggestions"
 
-              "utility"
               "completion"
             ];
           };
