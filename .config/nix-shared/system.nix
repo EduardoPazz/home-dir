@@ -27,8 +27,10 @@
     gl = "git pull";
     glog = "git log --topo-order --graph --pretty=format:\"$_git_log_oneline_format\"";
     glor = "git pull origin";
+    gm = "git merge";
     gp = "git push";
     gs = "git status";
+
     grhforno = "git reset --hard origin/forno";
     grhmain = "git reset --hard origin/main";
     grhmaster = "git reset --hard origin/master";
