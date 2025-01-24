@@ -11,6 +11,8 @@
   # Aliases
 
   environment.shellAliases = {
+    b = "bat";
+    l = "eza";
     v = "vim";
 
     cp = "cp -vi";
