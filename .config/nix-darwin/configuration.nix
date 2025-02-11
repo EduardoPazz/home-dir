@@ -89,18 +89,20 @@ in
 
   ## Homebrew packages
 
-  homebrew.casks =
-    map
-      (name: {
-        inherit name;
-        greedy = true;
-      })
-      [
-        "firefox"
-        "nginx"
-        "notion"
-        "whatsapp"
-      ];
+  homebrew = {
+    brews = [ "nginx" ];
+    casks =
+      map
+        (name: {
+          inherit name;
+          greedy = true;
+        })
+        [
+          "firefox"
+          "notion"
+          "whatsapp"
+        ];
+  };
 
   ## Home Manager packages
 
