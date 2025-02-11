@@ -111,7 +111,7 @@ in
 
       programs = {
         mise.enable = true;
-        nushell.enable= true;
+        nushell.enable = true;
 
         starship.settings.character = {
           success_symbol = "[󰀵](bold green)";
