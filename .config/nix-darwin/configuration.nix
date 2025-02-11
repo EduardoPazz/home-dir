@@ -76,7 +76,6 @@ in
     ffmpeg
     imagemagick
     jetbrains.idea-ultimate
-    nginx
     ngrok
     nixfmt-rfc-style
     postman
@@ -98,6 +97,7 @@ in
       })
       [
         "firefox"
+        "nginx"
         "notion"
         "whatsapp"
       ];
