@@ -100,6 +100,8 @@ in
         [
           "firefox"
           "notion"
+          "obs"
+          "vlc"
           "whatsapp"
         ];
   };
