@@ -1,172 +1,95 @@
-{ config, lib, pkgs, ... }:
-
+{
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../nix-shared/system.nix
     <home-manager/nixos>
   ];
 
-  nixpkgs.overlays = [
-  (final: prev: {
-    jackett = prev.jackett.overrideAttrs { doCheck = false; };
-  })
-];
+  # Settings
 
-networking.firewall.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
+  i18n.defaultLocale = "pt_BR.UTF-8";
+  networking.firewall.enable = false;
+  networking.hostName = "joao-homeserver";
+  networking.networkmanager.enable = true;
+  services.getty.autologinUser = "joao";
+  services.logind.extraConfig = "HandleLidSwitchExternalPower=ignore";
+  time.timeZone = "America/Sao_Paulo";
+
+  ## Shell
+
+  programs.zsh.enable = true; # necessary to set defaultUserShell
+  users.defaultUserShell = pkgs.zsh;
+
+  environment.variables = {
+    EDITOR = "vim";
+    TERM = "xterm-256color";
+  };
+
+  # Programs & Services
+
+  environment.systemPackages = with pkgs; [
+    qbittorrent-nox
+  ];
 
   systemd = {
-    packages = [pkgs.qbittorrent-nox];
+    packages = [ pkgs.qbittorrent-nox ];
     services."qbittorrent-nox@joao" = {
       overrideStrategy = "asDropin";
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
     };
   };
 
-  environment.variables = {
-  TERM="xterm-256color"; # fix terminal behaving weirdly over SSH
-  EDITOR="vim";
-  };
+  services.jackett.enable = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      jackett = prev.jackett.overrideAttrs { doCheck = false; };
+    })
+  ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  services.openssh.enable = true;
+  services.plex.enable = true;
 
-  networking.hostName = "joao-homeserver"; 
+  # User & Home Manager
 
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "America/Sao_Paulo";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "pt_BR.UTF-8";
-  #console = {
-    #keyMap = "br";
-  #};
-
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-
-programs.zsh.enable = true;
-users.defaultUserShell = pkgs.zsh;
-
-services.logind.extraConfig = "HandleLidSwitchExternalPower=ignore";
-
-  services.getty.autologinUser = "joao";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.joao = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "plex" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      vim git qbittorrent-nox 
+    extraGroups = [
+      "wheel"
+      "plex"
     ];
   };
 
+  home-manager.users.joao =
+    { pkgs, ... }:
+    {
+      imports = [ ../nix-shared/home-manager.nix ];
 
-home-manager.users.joao = { pkgs, ... }: {
-        imports = [ ../nix-shared/home-manager.nix ];
-
-programs = {
-
-
-  vim.extraConfig= ''
- 
-    syntax on
-
-  '';
-
-
-vim.enable = true;
-vim.plugins = [pkgs.vimPlugins.vim-nix];
-
-        atuin = {
-          enable = true;
-          flags = [ "--disable-up-arrow" ];
+      programs = {
+        starship.settings.character = {
+          success_symbol = "[󱄅](bold green)";
+          error_symbol = "[󱄅](bold red)";
         };
 
-        zsh = {
+        vim = {
           enable = true;
-          prezto = {
-            enable = true;
-            editor.keymap = "vi";
-            utility.safeOps = false;
-            pmodules = [
-              "editor"
 
-              "syntax-highlighting"
-              "history-substring-search"
-              "autosuggestions"
+          extraConfig = ''
+            syntax on
+          '';
 
-              "completion"
-            ];
-          };
+          plugins = [ pkgs.vimPlugins.vim-nix ];
         };
+      };
 
-};
+      # DO NOT CHANGE
+      home.stateVersion = "24.11";
+    };
 
   # DO NOT CHANGE
-  home.stateVersion = "24.11";
-};
-
-  # programs.firefox.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.jackett.enable = true;
-  services.plex.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.11"; # Did you read the comment?
-
+  system.stateVersion = "24.11";
 }
-

@@ -115,16 +115,10 @@ in
 
       programs = {
         mise.enable = true;
-        nushell.enable = true;
 
         starship.settings.character = {
           success_symbol = "[󰀵](bold green)";
           error_symbol = "[󰀵](bold red)";
-        };
-
-        atuin = {
-          enable = true;
-          flags = [ "--disable-up-arrow" ];
         };
 
         kitty = {
@@ -134,24 +128,6 @@ in
           font = {
             name = "FiraCode Nerd Font";
             size = 16;
-          };
-        };
-
-        zsh = {
-          enable = true;
-          prezto = {
-            enable = true;
-            editor.keymap = "vi";
-            utility.safeOps = false;
-            pmodules = [
-              "editor"
-
-              "syntax-highlighting"
-              "history-substring-search"
-              "autosuggestions"
-
-              "completion"
-            ];
           };
         };
       };
