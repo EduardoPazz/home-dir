@@ -18,6 +18,8 @@
   networking.networkmanager.enable = true;
   services.getty.autologinUser = "joao";
   services.logind.extraConfig = "HandleLidSwitchExternalPower=ignore";
+  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.enable = true;
   time.timeZone = "America/Sao_Paulo";
 
   ## Shell
