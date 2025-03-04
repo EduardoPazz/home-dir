@@ -9,11 +9,15 @@
     git.enable = true;
     hyfetch.enable = true;
     ripgrep.enable = true;
-    starship.enable = true;
 
     atuin = {
       enable = true;
       flags = [ "--disable-up-arrow" ];
+    };
+
+    starship = {
+      enable = true;
+      settings.shell.disabled = false;
     };
 
     yazi = {
