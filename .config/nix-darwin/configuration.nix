@@ -78,6 +78,7 @@ in
     jetbrains.idea-ultimate
     ngrok
     nixfmt-rfc-style
+    pipenv
     postman
     raycast
     tldr
