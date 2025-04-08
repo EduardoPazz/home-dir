@@ -71,6 +71,7 @@
     {
       imports = [ ../nix-shared/home-manager.nix ];
 
+
       programs = {
         starship.settings.character = {
           success_symbol = "[󱄅](bold green)";
@@ -82,9 +83,54 @@
 
           extraConfig = ''
             syntax on
+
+            " Options
+
+set hlsearch
+set number
+set relativenumber
+set incsearch
+set ignorecase
+set smartcase
+set scrolloff=5
+set sidescrolloff=5
+
+" Mappings
+
+"" Disabled
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+noremap <C-R> <Nop>
+
+"" Natural noh
+nnoremap <Esc> :noh<Enter>
+
+"" Leader mappings
+
+let mapleader = "\\"
+
+""" Display registers
+nnoremap <leader>r :reg<Enter>
+
+""" Toggle relative line number
+nnoremap <leader>re :set rnu!<Enter>
+
+""" Undo undo
+nnoremap <leader>u <C-R>
+
+""" Sort selected lines
+vnoremap <leader>s :sort<Enter>
           '';
 
           plugins = [ pkgs.vimPlugins.vim-nix ];
+        };
+        
+        zellij = {
+          enable = true;
+          enableZshIntegration = true;
         };
       };
 
