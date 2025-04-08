@@ -77,7 +77,6 @@ in
     ngrok
     nixfmt-rfc-style
     pipenv
-    tldr
 
     # monorepo migration
     gawk
