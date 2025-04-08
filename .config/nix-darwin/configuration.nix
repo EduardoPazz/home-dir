@@ -65,22 +65,18 @@ in
 
   # Packages
 
-  ## nix-darwin packages
+  ## nix-darwin packages - mostly CLI
 
   environment.systemPackages = with pkgs; [
-    brave
     colima
     docker
     docker-compose
     docker-credential-helpers
     ffmpeg
     imagemagick
-    jetbrains.idea-ultimate
     ngrok
     nixfmt-rfc-style
     pipenv
-    postman
-    raycast
     tldr
 
     # monorepo migration
@@ -88,7 +84,7 @@ in
     git-filter-repo
   ];
 
-  ## Homebrew packages
+  ## Homebrew packages - mostly GUI or not available in nixpkgs
 
   homebrew = {
     brews = [ "nginx" ];
@@ -99,9 +95,13 @@ in
           greedy = true;
         })
         [
+          "brave-browser"
           "firefox"
+          "intellij-idea"
           "notion"
           "obs"
+          "postman"
+          "raycast"
           "vlc"
           "whatsapp"
         ];
