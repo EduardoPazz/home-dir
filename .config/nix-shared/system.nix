@@ -1,5 +1,6 @@
+{ pkgs, ... }:
 {
-  # Settings  
+  # Settings
 
   home-manager.useGlobalPkgs = true;
 
@@ -7,6 +8,10 @@
   nix.optimise.automatic = true;
 
   nixpkgs.config.allowUnfree = true;
+
+  # Programs
+
+  environment.systemPackages = with pkgs; [ tldr ];
 
   # Aliases
 
