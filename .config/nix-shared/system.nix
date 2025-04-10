@@ -2,12 +2,16 @@
 {
   # Settings
 
-  home-manager.useGlobalPkgs = true;
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 30d";
+  };
 
-  nix.gc.automatic = true;
   nix.optimise.automatic = true;
 
   nixpkgs.config.allowUnfree = true;
+
+  home-manager.useGlobalPkgs = true;
 
   # Programs
 
