@@ -100,6 +100,7 @@ in
           "notion"
           "obs"
           "postman"
+          "pycharm"
           "raycast"
           "vlc"
           "whatsapp"
