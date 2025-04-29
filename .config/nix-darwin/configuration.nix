@@ -104,6 +104,7 @@ in
           "raycast"
           "vlc"
           "whatsapp"
+          "yt-dlp"
         ];
   };
 
