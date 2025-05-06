@@ -95,6 +95,7 @@ in
         })
         [
           "brave-browser"
+          "cursor"
           "firefox"
           "intellij-idea"
           "notion"
@@ -104,7 +105,6 @@ in
           "raycast"
           "vlc"
           "whatsapp"
-          "yt-dlp"
         ];
   };
 
