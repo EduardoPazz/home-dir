@@ -25,17 +25,12 @@
       on-window-detected = [
         {
           check-further-callbacks = true;
-          "if".app-id = "com.postmanlabs.mac";
-          run = [ "move-node-to-workspace D" ];
-        }
-        {
-          check-further-callbacks = true;
-          "if".app-id = "org.mozilla.firefox";
-          run = [ "move-node-to-workspace D" ];
+          "if".app-id = "com.jetbrains.pycharm";
+          run = [ "move-node-to-workspace 4" ];
         }
         {
           "if".app-id = "com.jetbrains.intellij";
-          run = [ "move-node-to-workspace D" ];
+          run = [ "move-node-to-workspace 5" ];
         }
       ];
       mode = {
@@ -61,14 +56,12 @@
           alt-3 = "workspace 3";
           alt-4 = "workspace 4";
           alt-5 = "workspace 5";
-          alt-d = "workspace D";
 
           alt-shift-1 = "move-node-to-workspace 1";
           alt-shift-2 = "move-node-to-workspace 2";
           alt-shift-3 = "move-node-to-workspace 3";
           alt-shift-4 = "move-node-to-workspace 4";
           alt-shift-5 = "move-node-to-workspace 5";
-          alt-shift-d = "move-node-to-workspace D";
 
           alt-tab = "workspace-back-and-forth";
           alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
