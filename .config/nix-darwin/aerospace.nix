@@ -33,6 +33,13 @@
           run = [ "move-node-to-workspace 5" ];
         }
       ];
+
+      workspace-to-monitor-force-assignment = {
+        "1" = "main";
+        "2" = "secondary";
+        "3" = "secondary"; # Chat and calendar
+      };
+
       mode = {
         main.binding = {
           alt-slash = "layout tiles horizontal vertical";
