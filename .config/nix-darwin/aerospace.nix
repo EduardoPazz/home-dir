@@ -25,19 +25,31 @@
       on-window-detected = [
         {
           check-further-callbacks = true;
+          "if".app-id = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm"; # Chat
+          run = [ "move-node-to-workspace 5" ];
+        }
+        {
+          check-further-callbacks = true;
+          "if".app-id = "com.google.Chrome.app.kjbdgfilnfhdoflbpgamdcdgpehopbep"; # Calendar
+          run = [ "move-node-to-workspace 5" ];
+        }
+        {
+          check-further-callbacks = true;
           "if".app-id = "com.jetbrains.pycharm";
-          run = [ "move-node-to-workspace 4" ];
+          run = [ "move-node-to-workspace 6" ];
         }
         {
           "if".app-id = "com.jetbrains.intellij";
-          run = [ "move-node-to-workspace 5" ];
+          run = [ "move-node-to-workspace 7" ];
         }
       ];
 
       workspace-to-monitor-force-assignment = {
         "1" = "main";
-        "2" = "secondary";
-        "3" = "secondary"; # Chat and calendar
+        "2" = "main";
+        "3" = "secondary";
+        "4" = "secondary";
+        "5" = "secondary"; # Chat and calendar
       };
 
       mode = {
@@ -63,12 +75,16 @@
           alt-3 = "workspace 3";
           alt-4 = "workspace 4";
           alt-5 = "workspace 5";
+          alt-6 = "workspace 6";
+          alt-7 = "workspace 7";
 
           alt-shift-1 = "move-node-to-workspace 1";
           alt-shift-2 = "move-node-to-workspace 2";
           alt-shift-3 = "move-node-to-workspace 3";
           alt-shift-4 = "move-node-to-workspace 4";
           alt-shift-5 = "move-node-to-workspace 5";
+          alt-shift-6 = "move-node-to-workspace 6";
+          alt-shift-7 = "move-node-to-workspace 7";
 
           alt-tab = "workspace-back-and-forth";
           alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
