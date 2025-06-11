@@ -117,7 +117,10 @@ in
       imports = [ ../nix-shared/home-manager.nix ];
 
       programs = {
-        mise.enable = true;
+        direnv = {
+          enable = true;
+          nix-direnv.enable = true;
+        };
 
         starship.settings.character = {
           success_symbol = "[󰀵](bold green)";
@@ -133,6 +136,23 @@ in
             size = 16;
           };
         };
+
+        zsh.initExtra = ''
+          nix-shell-setup() {
+            cat > shell.nix << 'EOF'
+          { pkgs ? import <nixpkgs> {}}:
+
+          pkgs.mkShellNoCC {
+            packages = with pkgs; [ ];
+          }
+          EOF
+
+            echo "use nix" >> .envrc
+            direnv allow
+
+            echo "Nix shell environment setup complete!"
+          }
+        '';
       };
 
       # DO NOT CHANGE
