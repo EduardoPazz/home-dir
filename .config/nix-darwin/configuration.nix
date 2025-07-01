@@ -32,22 +32,24 @@ in
 
   users.users.${userName}.home = homePath;
 
-  networking.computerName = "MacBook do Edu";
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   time.timeZone = "America/Sao_Paulo";
 
-  system.defaults = {
-    controlcenter.BatteryShowPercentage = true;
-    dock.autohide = true;
-    hitoolbox.AppleFnUsageType = "Do Nothing";
-    loginwindow.autoLoginUser = userName;
+  system = {
+    primaryUser = userName;
+    defaults = {
+      controlcenter.BatteryShowPercentage = true;
+      dock.autohide = true;
+      hitoolbox.AppleFnUsageType = "Do Nothing";
+      loginwindow.autoLoginUser = userName;
 
-    finder = {
-      AppleShowAllExtensions = true;
-      AppleShowAllFiles = false;
-      ShowStatusBar = true;
-      _FXShowPosixPathInTitle = true;
-      _FXSortFoldersFirst = true;
+      finder = {
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = false;
+        ShowStatusBar = true;
+        _FXShowPosixPathInTitle = true;
+        _FXSortFoldersFirst = true;
+      };
     };
   };
 
@@ -61,7 +63,7 @@ in
 
   # Fonts
 
-  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+  fonts.packages = [ pkgs.nerd-fonts.fira-code ];
 
   # Packages
 
@@ -137,7 +139,7 @@ in
           };
         };
 
-        zsh.initExtra = ''
+        zsh.initContent = ''
           nix-shell-setup() {
             cat > shell.nix << 'EOF'
           { pkgs ? import <nixpkgs> {}}:
