@@ -75,9 +75,11 @@ in
     docker-compose
     docker-credential-helpers
     ffmpeg
+    go
     imagemagick
     ngrok
     nixfmt-rfc-style
+    nodePackages.nodejs
     pipenv
     pnpm
 
