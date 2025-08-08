@@ -39,6 +39,7 @@
     glog = "git log --topo-order --graph --pretty=format:\"$_git_log_oneline_format\"";
     glor = "git pull origin";
     gm = "git merge";
+    gms = "git merge --squash";
     gp = "git push";
     gs = "git status";
 
