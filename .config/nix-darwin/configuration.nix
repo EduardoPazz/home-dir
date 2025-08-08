@@ -82,10 +82,6 @@ in
     nodePackages.nodejs
     pipenv
     pnpm
-
-    # monorepo migration
-    gawk
-    git-filter-repo
   ];
 
   ## Homebrew packages - mostly GUI or not available in nixpkgs
@@ -103,13 +99,10 @@ in
           "cursor"
           "firefox"
           "intellij-idea"
-          "notion"
-          "obs"
           "postman"
           "pycharm"
           "raycast"
           "vlc"
-          "whatsapp"
         ];
   };
 
